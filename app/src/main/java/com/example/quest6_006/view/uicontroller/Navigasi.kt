@@ -29,3 +29,28 @@ fun SiswaApp(
 ){
     Scaffold { isiRuang->
         val uiState = viewModel.statusUI.collectAsState()
+        NavHost(
+            navController = navController,
+            startDestination = Navigasi.Formulirku.name,
+
+            modifier = Modifier.padding(paddingValues = isiRuang)) {
+            composable(route = Navigasi.Formulirku.name) {
+                val konteks = LocalContext.current
+                FormSiswa(
+                    pilihanJK = JenisK.map { id -> konteks.resources.getString(id) },
+                    onSubmitButtonClicked = {
+                        navController.navigate(route = Navigasi.Detail.name)
+                    }
+                )
+            }
+            composable(route = Navigasi.Detail.name) {
+                TampilanSiswa(
+                    statusUiSiswa = uiState.value,
+                    onBackButtonClicked = {cancelAndBackToFormulir(navController)
+                    }
+                )
+            }
+        }
+    }
+}
+
