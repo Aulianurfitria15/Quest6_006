@@ -46,3 +46,32 @@ fun FormSiswa(
     var txtGender by remember { mutableStateOf("") }
     val listData: MutableList<String> = mutableListOf(txtNama, txtGender, txtAlamat)
 
+    Scaffold (modifier = Modifier,
+        {
+            TopAppBar(
+                title = { Text(text = stringResource(id= R.string.home), color = Color.White)},
+                colors = TopAppBarDefaults.mediumTopAppBarColors(
+                    colorResource(id = R.color.teal_700))
+            )}
+    ) { isiRuang ->
+        Column(
+            modifier = Modifier.padding(isiRuang),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            OutlinedTextField(
+                value = txtNama,
+                singleLine = true,
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .width(width = 250.dp),
+                label = { Text(text = "Nama Lengkap") },
+                onValueChange = {
+                    txtNama = it
+                }
+            )
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .width(250.dp), thickness = Thickness, color = Color.Red
+            )
